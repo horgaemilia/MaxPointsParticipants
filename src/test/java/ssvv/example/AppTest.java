@@ -55,9 +55,9 @@ public class AppTest
     }
 
     @Test
-    public void addStudentValidFieldsShouldReturnError()
+    public void addStudentValidFieldsShouldAddStudent()
     {
-        Student dummyStudent = new Student("11","gigel",129);
+        Student dummyStudent = new Student("100","gigel",129);
         Validator<Student> studentValidator = new StudentValidator();
         Validator<Tema> temaValidator = new TemaValidator();
         Validator<Nota> notaValidator = new NotaValidator();
