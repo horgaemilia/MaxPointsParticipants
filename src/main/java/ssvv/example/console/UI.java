@@ -62,7 +62,7 @@ public class UI {
         String nume = scanner.nextLine();
 
         System.out.println("Introduceti grupa studentului: ");
-        int grupa = scanner.nextInt();
+        int grupa = Integer.parseInt(scanner.nextLine());
 
         System.out.println("Introduceti email-ul studentului: ");
         String email = scanner.nextLine();

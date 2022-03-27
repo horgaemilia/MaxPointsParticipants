@@ -171,9 +171,6 @@ public class AppTest
         Service service = new Service(fileRepository1, fileRepository2, fileRepository3);
         service.saveStudent(dummyStudent.getID(),dummyStudent.getNume(),dummyStudent.getGrupa(),dummyStudent.getEmail());
         assertEquals(1,service.saveStudent(dummyStudent.getID(),dummyStudent.getNume(),dummyStudent.getGrupa(),dummyStudent.getEmail()));
-
-
-
     }
 
 }
