@@ -7,6 +7,7 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.Assert;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -37,6 +38,8 @@ public class AppTest
     /**
      * Rigorous Test :-)
      */
+    private static final String NULL_STRING = null;
+    private static final String EMPTY_STRING="";
     private Validator<Student> studentValidator = new StudentValidator();
     private Validator<Tema> temaValidator = new TemaValidator();
     private Validator<Nota> notaValidator = new NotaValidator();
@@ -92,4 +95,85 @@ public class AppTest
         int value = service.saveStudent(dummyStudent.getID(),dummyStudent.getNume(),dummyStudent.getGrupa(),"a@a.com");
         assertEquals(0,value);
     }
+    @Test
+    public void TestSaveStudent_ValidInput_ShouldPass() {
+        Student dummyStudent = new Student("123", "ana",123,"a@a.com");
+        Service service = new Service(fileRepository1, fileRepository2, fileRepository3);
+        assertEquals(0,service.saveStudent(dummyStudent.getID(),dummyStudent.getNume(),dummyStudent.getGrupa(),dummyStudent.getEmail()));
+
+    }
+    @Test
+    public void TestSaveStudent_NullId_ShouldThrowErrorMessage()  {
+        Student dummyStudent = new Student(NULL_STRING, "ana",123,"a@a.com");
+        Service service = new Service(fileRepository1, fileRepository2, fileRepository3);
+        assertEquals(1,service.saveStudent(dummyStudent.getID(),dummyStudent.getNume(),dummyStudent.getGrupa(),dummyStudent.getEmail()));
+    }
+
+    @Test
+    public void TestSaveStudent_Empty_Id_ShouldThrowErrorMessage()  {
+
+        Student dummyStudent = new Student(EMPTY_STRING, "ana",123,"a@a.com");
+        Service service = new Service(fileRepository1, fileRepository2, fileRepository3);
+        assertEquals(1,service.saveStudent(dummyStudent.getID(),dummyStudent.getNume(),dummyStudent.getGrupa(),dummyStudent.getEmail()));
+    }
+    @Test
+    public void TestSaveStudent_Null_Name_ShouldThrowErrorMessage()  {
+
+        Student dummyStudent = new Student("123", NULL_STRING,123,"a@a.com");
+        Service service = new Service(fileRepository1, fileRepository2, fileRepository3);
+        assertEquals(1,service.saveStudent(dummyStudent.getID(),dummyStudent.getNume(),dummyStudent.getGrupa(),dummyStudent.getEmail()));
+
+    }
+    @Test
+    public void TestSaveStudent_Null_Email_ShouldThrowErrorMessage()  {
+
+        Student dummyStudent = new Student("123", "ana",123,NULL_STRING);
+        Service service = new Service(fileRepository1, fileRepository2, fileRepository3);
+        assertEquals(1,service.saveStudent(dummyStudent.getID(),dummyStudent.getNume(),dummyStudent.getGrupa(),dummyStudent.getEmail()));
+
+
+    }
+    @Test
+    public void TestSaveStudent_Empty_Email_ShouldThrowErrorMessage()  {
+
+        Student dummyStudent = new Student("123", "ana",123,EMPTY_STRING);
+        Service service = new Service(fileRepository1, fileRepository2, fileRepository3);
+        assertEquals(1,service.saveStudent(dummyStudent.getID(),dummyStudent.getNume(),dummyStudent.getGrupa(),dummyStudent.getEmail()));
+
+
+    }
+    @Test
+    public void TestSaveStudent_Invalid_Email_ShouldThrowErrorMessage()  {
+
+        Student dummyStudent = new Student("123", "ana",123,"abc");
+        Service service = new Service(fileRepository1, fileRepository2, fileRepository3);
+        assertEquals(1,service.saveStudent(dummyStudent.getID(),dummyStudent.getNume(),dummyStudent.getGrupa(),dummyStudent.getEmail()));
+
+
+    }
+    @Test
+    public void TestSaveStudent_Negative_Group_ShouldThrowErrorMessage() {
+        Student dummyStudent = new Student("123", "ana",-12,"a@a.com");
+        Service service = new Service(fileRepository1, fileRepository2, fileRepository3);
+        assertEquals(1,service.saveStudent(dummyStudent.getID(),dummyStudent.getNume(),dummyStudent.getGrupa(),dummyStudent.getEmail()));
+
+    }
+    @Test
+    public void TestSaveStudent_Invalid_Group_ShouldThrowErrorMessage() {
+        Student dummyStudent = new Student("123", "ana",15,"a@a.com");
+        Service service = new Service(fileRepository1, fileRepository2, fileRepository3);
+        assertEquals(1,service.saveStudent(dummyStudent.getID(),dummyStudent.getNume(),dummyStudent.getGrupa(),dummyStudent.getEmail()));
+
+    }
+    @Test
+    public void TestSaveStudent_Existing_Id_ShouldThrowErrorMessage(){
+        Student dummyStudent = new Student("123", "ana",123,"a@a.com");
+        Service service = new Service(fileRepository1, fileRepository2, fileRepository3);
+        service.saveStudent(dummyStudent.getID(),dummyStudent.getNume(),dummyStudent.getGrupa(),dummyStudent.getEmail());
+        assertEquals(1,service.saveStudent(dummyStudent.getID(),dummyStudent.getNume(),dummyStudent.getGrupa(),dummyStudent.getEmail()));
+
+
+
+    }
+
 }
