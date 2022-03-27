@@ -172,5 +172,124 @@ public class AppTest
         service.saveStudent(dummyStudent.getID(),dummyStudent.getNume(),dummyStudent.getGrupa(),dummyStudent.getEmail());
         assertEquals(1,service.saveStudent(dummyStudent.getID(),dummyStudent.getNume(),dummyStudent.getGrupa(),dummyStudent.getEmail()));
     }
+    @Test
+    public void TestSaveStudent_IdLengthZero_ShouldThrowErrorMessage()
+    {
+        Student dummyStudent = new Student("", "ana",15,"a@a.com");
+        Service service = new Service(fileRepository1, fileRepository2, fileRepository3);
+        assertEquals(1,service.saveStudent(dummyStudent.getID(),dummyStudent.getNume(),dummyStudent.getGrupa(),dummyStudent.getEmail()));
+    }
+
+    @Test
+    public void TestSaveStudent_IdLengthOne_ShouldAddStudent()
+    {
+        Student dummyStudent = new Student("1", "ana",124,"a@a.com");
+        Service service = new Service(fileRepository1, fileRepository2, fileRepository3);
+        assertEquals(0,service.saveStudent(dummyStudent.getID(),dummyStudent.getNume(),dummyStudent.getGrupa(),dummyStudent.getEmail()));
+    }
+
+    @Test
+    public void TestSaveStudent_IdLengthTwo_ShouldAddStudent()
+    {
+        Student dummyStudent = new Student("11", "ana",125,"a@a.com");
+        Service service = new Service(fileRepository1, fileRepository2, fileRepository3);
+        assertEquals(0,service.saveStudent(dummyStudent.getID(),dummyStudent.getNume(),dummyStudent.getGrupa(),dummyStudent.getEmail()));
+    }
+
+    @Test
+    public void TestSaveStudent_NameLengthZero_ShouldThrowErrorMessage()
+    {
+        Student dummyStudent = new Student("11", "",125,"a@a.com");
+        Service service = new Service(fileRepository1, fileRepository2, fileRepository3);
+        assertEquals(1,service.saveStudent(dummyStudent.getID(),dummyStudent.getNume(),dummyStudent.getGrupa(),dummyStudent.getEmail()));
+    }
+
+    @Test
+    public void TestSaveStudent_NameLengthOne_ShouldAddStudent()
+    {
+        Student dummyStudent = new Student("11", "a",125,"a@a.com");
+        Service service = new Service(fileRepository1, fileRepository2, fileRepository3);
+        assertEquals(0,service.saveStudent(dummyStudent.getID(),dummyStudent.getNume(),dummyStudent.getGrupa(),dummyStudent.getEmail()));
+    }
+
+    @Test
+    public void TestSaveStudent_NameLengthTwo_ShouldAddStudent()
+    {
+        Student dummyStudent = new Student("11", "aa",125,"a@a.com");
+        Service service = new Service(fileRepository1, fileRepository2, fileRepository3);
+        assertEquals(0,service.saveStudent(dummyStudent.getID(),dummyStudent.getNume(),dummyStudent.getGrupa(),dummyStudent.getEmail()));
+    }
+
+    @Test
+    public void TestSaveStudent_EmailLengthZero_ShouldThrowError()
+    {
+        Student dummyStudent = new Student("11", "aa",125,"");
+        Service service = new Service(fileRepository1, fileRepository2, fileRepository3);
+        assertEquals(1,service.saveStudent(dummyStudent.getID(),dummyStudent.getNume(),dummyStudent.getGrupa(),dummyStudent.getEmail()));
+    }
+
+    @Test
+    public void TestSaveStudent_EmailLengthOne_ShouldThrowError()
+    {
+        Student dummyStudent = new Student("11", "aa",125,"@");
+        Service service = new Service(fileRepository1, fileRepository2, fileRepository3);
+        assertEquals(1,service.saveStudent(dummyStudent.getID(),dummyStudent.getNume(),dummyStudent.getGrupa(),dummyStudent.getEmail()));
+    }
+
+    @Test
+    public void TestSaveStudent_EmailLengthTwo_ShouldAddStudent()
+    {
+        Student dummyStudent = new Student("11", "aa",125,"@.");
+        Service service = new Service(fileRepository1, fileRepository2, fileRepository3);
+        assertEquals(0,service.saveStudent(dummyStudent.getID(),dummyStudent.getNume(),dummyStudent.getGrupa(),dummyStudent.getEmail()));
+    }
+
+    @Test
+    public void TestSaveStudent_GroupLowerBoundMinusOne_ShouldThrowError()
+    {
+        Student dummyStudent = new Student("11", "aa",109,"a@a.com");
+        Service service = new Service(fileRepository1, fileRepository2, fileRepository3);
+        assertEquals(1,service.saveStudent(dummyStudent.getID(),dummyStudent.getNume(),dummyStudent.getGrupa(),dummyStudent.getEmail()));
+    }
+
+    @Test
+    public void TestSaveStudent_GroupLowerBound_ShouldAddStudent()
+    {
+        Student dummyStudent = new Student("11", "aa",110,"a@a.com");
+        Service service = new Service(fileRepository1, fileRepository2, fileRepository3);
+        assertEquals(0,service.saveStudent(dummyStudent.getID(),dummyStudent.getNume(),dummyStudent.getGrupa(),dummyStudent.getEmail()));
+    }
+
+    @Test
+    public void TestSaveStudent_GroupLowerBoundPlusOne_ShouldAddStudent()
+    {
+        Student dummyStudent = new Student("11", "aa",111,"a@a.com");
+        Service service = new Service(fileRepository1, fileRepository2, fileRepository3);
+        assertEquals(0,service.saveStudent(dummyStudent.getID(),dummyStudent.getNume(),dummyStudent.getGrupa(),dummyStudent.getEmail()));
+    }
+
+    @Test
+    public void TestSaveStudent_GroupUpperBoundMinusOne_ShouldAddStudent()
+    {
+        Student dummyStudent = new Student("11", "aa",937,"a@a.com");
+        Service service = new Service(fileRepository1, fileRepository2, fileRepository3);
+        assertEquals(0,service.saveStudent(dummyStudent.getID(),dummyStudent.getNume(),dummyStudent.getGrupa(),dummyStudent.getEmail()));
+    }
+
+    @Test
+    public void TestSaveStudent_GroupUpperBound_ShouldAddStudent()
+    {
+        Student dummyStudent = new Student("11", "aa",938,"a@a.com");
+        Service service = new Service(fileRepository1, fileRepository2, fileRepository3);
+        assertEquals(0,service.saveStudent(dummyStudent.getID(),dummyStudent.getNume(),dummyStudent.getGrupa(),dummyStudent.getEmail()));
+    }
+
+    @Test
+    public void TestSaveStudent_GroupUpperBoundPlusOne_ShouldThrowError()
+    {
+        Student dummyStudent = new Student("11", "aa",939,"a@a.com");
+        Service service = new Service(fileRepository1, fileRepository2, fileRepository3);
+        assertEquals(1,service.saveStudent(dummyStudent.getID(),dummyStudent.getNume(),dummyStudent.getGrupa(),dummyStudent.getEmail()));
+    }
 
 }

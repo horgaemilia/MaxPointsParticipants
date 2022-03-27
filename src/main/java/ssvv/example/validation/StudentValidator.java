@@ -11,13 +11,13 @@ public class StudentValidator implements Validator<Student> {
         if (student.getNume() == null || student.getNume().equals("")) {
             throw new ValidationException("Nume invalid! \n");
         }
-        if (student.getGrupa() <= 110 || student.getGrupa() >= 938) {
+        if (student.getGrupa() < 110 || student.getGrupa() > 938) {
             throw new ValidationException("Grupa invalida! \n");
         }
         if(student.getEmail() == null || student.getEmail().equals("")){
             throw new ValidationException("Email invalid! \n");
         }
-        if(!student.getEmail().contains("@") && !student.getEmail().contains(".")){
+        if(!(student.getEmail().contains("@") && student.getEmail().contains("."))){
             throw new ValidationException("Email invalid! \n");
         }
     }
