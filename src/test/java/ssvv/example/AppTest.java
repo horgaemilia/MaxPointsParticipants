@@ -82,20 +82,14 @@ public class AppTest
     {
         Student dummyStudent = new Student(null,"gigel",129,"d@s.com");
         Service service = new Service(fileRepository1, fileRepository2, fileRepository3);
-        try {
-            service.saveStudent(dummyStudent.getID(),dummyStudent.getNume(),dummyStudent.getGrupa(),dummyStudent.getEmail());
-            assert(false);
-        }
-        catch (Exception ex)
-        {
-            assert(true);
-        }
+        assertEquals(1,service.saveStudent(dummyStudent.getID(),dummyStudent.getNume(),dummyStudent.getGrupa(),"a@a.com"));
     }
 
     @Test
     public void addStudentValidFieldsShouldAddStudent()
     {
-        Student dummyStudent = new Student("100","gigel",129,"s@m.com");
-        assertEquals(1,service.saveStudent(dummyStudent.getID(),dummyStudent.getNume(),dummyStudent.getGrupa(),dummyStudent.getEmail()));
+        Student dummyStudent = new Student("100","gigel",129,"d@s.com");
+        int value = service.saveStudent(dummyStudent.getID(),dummyStudent.getNume(),dummyStudent.getGrupa(),"a@a.com");
+        assertEquals(0,value);
     }
 }
