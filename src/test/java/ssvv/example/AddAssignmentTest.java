@@ -102,8 +102,7 @@ public class AddAssignmentTest {
         Service service = new Service(fileRepository1, fileRepository2, fileRepository3);
         Tema tema = new Tema(NULL_STRING, "description", 12, 2);
         try {
-            TemaValidator validator = null;
-            validator.validate(tema);
+            temaValidator.validate(tema);
             assert (false);
         } catch (Exception e) {
             assert (true);
@@ -115,9 +114,8 @@ public class AddAssignmentTest {
         Service service = new Service(fileRepository1, fileRepository2, fileRepository3);
         Tema tema = new Tema(EMPTY_STRING, "description", 12, 2);
         try {
-                TemaValidator validator = null;
-                validator.validate(tema);
-                assert (false);
+            temaValidator.validate(tema);
+            assert (false);
             } catch (Exception e) {
                 assert (true);
             }
@@ -127,8 +125,7 @@ public class AddAssignmentTest {
         Service service = new Service(fileRepository1, fileRepository2, fileRepository3);
         Tema tema = new Tema("1", NULL_STRING, 12, 2);
         try {
-            TemaValidator validator = null;
-            validator.validate(tema);
+            temaValidator.validate(tema);
             assert (false);
         } catch (Exception e) {
             assert (true);
@@ -139,8 +136,7 @@ public class AddAssignmentTest {
         Service service = new Service(fileRepository1, fileRepository2, fileRepository3);
         Tema tema = new Tema("1", EMPTY_STRING, 12, 2);
         try {
-            TemaValidator validator = null;
-            validator.validate(tema);
+            temaValidator.validate(tema);
             assert (false);
         } catch (Exception e) {
             assert (true);
@@ -151,8 +147,7 @@ public class AddAssignmentTest {
         Service service = new Service(fileRepository1, fileRepository2, fileRepository3);
         Tema tema = new Tema("1", "description", 0, 2);
         try {
-            TemaValidator validator = null;
-            validator.validate(tema);
+            temaValidator.validate(tema);
             assert (false);
         } catch (Exception e) {
             assert (true);
@@ -163,8 +158,7 @@ public class AddAssignmentTest {
         Service service = new Service(fileRepository1, fileRepository2, fileRepository3);
         Tema tema = new Tema("1", "description", 16, 2);
         try {
-            TemaValidator validator = null;
-            validator.validate(tema);
+            temaValidator.validate(tema);
             assert (false);
         } catch (Exception e) {
             assert (true);
@@ -175,8 +169,7 @@ public class AddAssignmentTest {
         Service service = new Service(fileRepository1, fileRepository2, fileRepository3);
         Tema tema = new Tema("1", "description", 12, 0);
         try {
-            TemaValidator validator = null;
-            validator.validate(tema);
+            temaValidator.validate(tema);
             assert (false);
         } catch (Exception e) {
             assert (true);
@@ -187,8 +180,7 @@ public class AddAssignmentTest {
         Service service = new Service(fileRepository1, fileRepository2, fileRepository3);
         Tema tema = new Tema("1", "description", 12, 16);
         try {
-            TemaValidator validator = null;
-            validator.validate(tema);
+            temaValidator.validate(tema);
             assert (false);
         } catch (Exception e) {
             assert (true);
@@ -199,11 +191,10 @@ public class AddAssignmentTest {
         Service service = new Service(fileRepository1, fileRepository2, fileRepository3);
         Tema tema = new Tema("1", "description", 12, 2);
         try {
-            Validator<Tema> validator = null;
-            validator.validate(tema);
-            assert (false);
-        } catch (Exception e) {
+            temaValidator.validate(tema);
             assert (true);
+        } catch (Exception e) {
+            assert (false);
         }
     }
 }
