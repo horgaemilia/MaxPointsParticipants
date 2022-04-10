@@ -86,4 +86,124 @@ public class AddAssignmentTest {
         fileRepository2.save(tema);
         assertNull(fileRepository2.save(tema));
     }
+
+    @Test
+    public void saveHomeworkShouldReturn1(){
+        Service service = new Service(fileRepository1, fileRepository2, fileRepository3);
+        assertEquals(service.saveTema(NULL_STRING,"description",12,2),1);
+    }
+    @Test
+    public void saveHomeworkShouldReturn0(){
+        Service service = new Service(fileRepository1, fileRepository2, fileRepository3);
+        assertEquals(service.saveTema("1","description",12,2),0);
+    }
+    @Test
+    public void saveHomeworkNullIdShouldThrowValidationException() {
+        Service service = new Service(fileRepository1, fileRepository2, fileRepository3);
+        Tema tema = new Tema(NULL_STRING, "description", 12, 2);
+        try {
+            TemaValidator validator = null;
+            validator.validate(tema);
+            assert (false);
+        } catch (Exception e) {
+            assert (true);
+        }
+    }
+
+    @Test
+    public void saveHomeworkEmptyIdShouldThrowValidationException() {
+        Service service = new Service(fileRepository1, fileRepository2, fileRepository3);
+        Tema tema = new Tema(EMPTY_STRING, "description", 12, 2);
+        try {
+                TemaValidator validator = null;
+                validator.validate(tema);
+                assert (false);
+            } catch (Exception e) {
+                assert (true);
+            }
+        }
+    @Test
+    public void saveHomeworkNULLDescriptionShouldThrowValidationException() {
+        Service service = new Service(fileRepository1, fileRepository2, fileRepository3);
+        Tema tema = new Tema("1", NULL_STRING, 12, 2);
+        try {
+            TemaValidator validator = null;
+            validator.validate(tema);
+            assert (false);
+        } catch (Exception e) {
+            assert (true);
+        }
+    }
+    @Test
+    public void saveHomeworkEmptyDescriptionShouldThrowValidationException() {
+        Service service = new Service(fileRepository1, fileRepository2, fileRepository3);
+        Tema tema = new Tema("1", EMPTY_STRING, 12, 2);
+        try {
+            TemaValidator validator = null;
+            validator.validate(tema);
+            assert (false);
+        } catch (Exception e) {
+            assert (true);
+        }
+    }
+    @Test
+    public void saveHomeworkWeek0InvalidDeadlineDescriptionShouldThrowValidationException() {
+        Service service = new Service(fileRepository1, fileRepository2, fileRepository3);
+        Tema tema = new Tema("1", "description", 0, 2);
+        try {
+            TemaValidator validator = null;
+            validator.validate(tema);
+            assert (false);
+        } catch (Exception e) {
+            assert (true);
+        }
+    }
+    @Test
+    public void saveHomeworkWeek16InvalidDeadlineDescriptionShouldThrowValidationException() {
+        Service service = new Service(fileRepository1, fileRepository2, fileRepository3);
+        Tema tema = new Tema("1", "description", 16, 2);
+        try {
+            TemaValidator validator = null;
+            validator.validate(tema);
+            assert (false);
+        } catch (Exception e) {
+            assert (true);
+        }
+    }
+    @Test
+    public void saveHomeworkWeek0StartDeadlineDescriptionShouldThrowValidationException() {
+        Service service = new Service(fileRepository1, fileRepository2, fileRepository3);
+        Tema tema = new Tema("1", "description", 12, 0);
+        try {
+            TemaValidator validator = null;
+            validator.validate(tema);
+            assert (false);
+        } catch (Exception e) {
+            assert (true);
+        }
+    }
+    @Test
+    public void saveHomeworkWeek16StartDeadlineDescriptionShouldThrowValidationException() {
+        Service service = new Service(fileRepository1, fileRepository2, fileRepository3);
+        Tema tema = new Tema("1", "description", 12, 16);
+        try {
+            TemaValidator validator = null;
+            validator.validate(tema);
+            assert (false);
+        } catch (Exception e) {
+            assert (true);
+        }
+    }
+    @Test
+    public void saveHomeworkShouldNotThrowValidationException() {
+        Service service = new Service(fileRepository1, fileRepository2, fileRepository3);
+        Tema tema = new Tema("1", "description", 12, 2);
+        try {
+            Validator<Tema> validator = null;
+            validator.validate(tema);
+            assert (false);
+        } catch (Exception e) {
+            assert (true);
+        }
+    }
 }
