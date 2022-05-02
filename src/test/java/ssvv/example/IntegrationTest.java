@@ -83,7 +83,6 @@ public class IntegrationTest {
     public void TestSaveStudent_ValidInput_ShouldPass() {
         Student dummyStudent = new Student("123", "ana",123,"a@a.com");
         assertEquals(0,service.saveStudent(dummyStudent.getID(),dummyStudent.getNume(),dummyStudent.getGrupa(),dummyStudent.getEmail()));
-
     }
 
     @Test
@@ -118,5 +117,30 @@ public class IntegrationTest {
         assertEquals(0,service.saveNota(dummyStudent.getID(),dummyTema.getID(),dummyNota.getNota(),dummyNota.getSaptamanaPredare(),dummyNota.getFeedback()));
     }
 
+    @Test
+    public void TestSaveStudent_InValidInput_ShouldThrowError() {
+        Student dummyStudent = new Student("", "ana",123,"a@a.com");
+        assertEquals(1,service.saveStudent(dummyStudent.getID(),dummyStudent.getNume(),dummyStudent.getGrupa(),dummyStudent.getEmail()));
+    }
+
+    @Test
+    public void TestAddStudentAddHomework_InvalidStudentValidHomework_ShouldPass()
+    {
+        Student dummyStudent = new Student("", "ana",123,"a@a.com");
+        service.saveStudent(dummyStudent.getID(),dummyStudent.getNume(),dummyStudent.getGrupa(),dummyStudent.getEmail());
+        Tema dummyTema = new Tema("1","tema",7,1);
+        assertEquals(0,service.saveTema(dummyTema.getID(), dummyTema.getDescriere(), dummyTema.getDeadline(), dummyTema.getStartline()));
+    }
+
+    @Test
+    public void IntegrationAddGrade_InvalidStudent_AddGradeShouldThrowError()
+    {
+        Student dummyStudent = new Student("", "ana",123,"a@a.com");
+        service.saveStudent(dummyStudent.getID(),dummyStudent.getNume(),dummyStudent.getGrupa(),dummyStudent.getEmail());
+        Tema dummyTema = new Tema("1","tema",7,1);
+        service.saveTema(dummyTema.getID(), dummyTema.getDescriere(), dummyTema.getDeadline(), dummyTema.getStartline());
+        Nota dummyNota = new Nota(new Pair<>(dummyStudent.getID(),dummyTema.getID()),7,4,"very good");
+        assertEquals(-1,service.saveNota(dummyStudent.getID(),dummyTema.getID(),dummyNota.getNota(),dummyNota.getSaptamanaPredare(),dummyNota.getFeedback()));
+    }
 
 }
